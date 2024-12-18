@@ -1,14 +1,69 @@
 import { Link } from "react-router-dom";
-import FormInput from "../components/FormInput";
-
+import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 function Login() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!formData.email || !formData.password) {
+      toast.warn("Barcha maydonlarni to'ldiring!");
+      return;
+    }
+
+    if (formData.password.length <= 8) {
+      toast.error("Paroll 8ta belgidan kam bo'lmasin");
+      return;
+    }
+
+    console.log(formData);
+    toast.success("Ro'yxatdan o'tish muvaffaqiyatli!");
+
+    setFormData({
+      email: "",
+      password: "",
+    });
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   return (
     <div className="mx-auto] h-screen w-full bg-cover bg-center bg-no-repeat bg-[url('/img/rasm4.jpeg')]">
+      a<ToastContainer />
       <div className="flex items-center mx-auto h-[550px] max-w-xl rounded-full place-items-center w-full font-bold relative top-[90px] backdrop-blur-md">
-        <form className="max-w-96 mx-auto w-full bg-inherit">
+        <form
+          onSubmit={handleSubmit}
+          className="max-w-96 mx-auto w-full bg-inherit"
+        >
           <h2 className="text-4xl text-center mb-5">Login</h2>
-          <FormInput type="email" placeholder="Email" label="Email" />
-          <FormInput type="password" placeholder="Password" label="Password" />
+          <input
+            type="text"
+            id="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full p-2 border border-blue-300 rounded-2xl mt-5 text-white bg-inherit "
+          />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            className="w-full p-2 border border-blue-300 rounded-2xl mt-5 bg-inherit"
+          />
           <button className="btn btn-primary btn-block mt-5">Login</button>
           <div className="text-center mt-5">
             <p>

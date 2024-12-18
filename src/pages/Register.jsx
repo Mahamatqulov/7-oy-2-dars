@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 function Register() {
@@ -104,6 +105,14 @@ function Register() {
           >
             Register
           </button>
+          <div className="text-center mt-5">
+            <p>
+              If you have accounter,
+              <Link className="link link-primary" to="/login">
+                Login
+              </Link>
+            </p>
+          </div>
         </form>
       </div>
     </div>
