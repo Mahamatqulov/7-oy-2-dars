@@ -11,17 +11,17 @@ function Login() {
     e.preventDefault();
 
     if (!formData.email || !formData.password) {
-      toast.warn("Barcha maydonlarni to'ldiring!");
+      toast.warn("Fill in all the fields!");
       return;
     }
 
     if (formData.password.length <= 8) {
-      toast.error("Paroll 8ta belgidan kam bo'lmasin");
+      toast.error("Password must not be less than 8 characters");
       return;
     }
 
     console.log(formData);
-    toast.success("Ro'yxatdan o'tish muvaffaqiyatli!");
+    toast.success("Registration is successful!");
 
     setFormData({
       email: "",
@@ -39,7 +39,7 @@ function Login() {
 
   return (
     <div className="mx-auto] h-screen w-full bg-cover bg-center bg-no-repeat bg-[url('/img/rasm4.jpeg')]">
-      a<ToastContainer />
+      <ToastContainer />
       <div className="flex items-center mx-auto h-[550px] max-w-xl rounded-full place-items-center w-full font-bold relative top-[90px] backdrop-blur-md">
         <form
           onSubmit={handleSubmit}
@@ -50,7 +50,7 @@ function Login() {
             type="text"
             id="email"
             name="email"
-            placeholder="Email"
+            placeholder="EmailName@gmail.com"
             value={formData.email}
             onChange={handleChange}
             className="w-full p-2 border border-blue-300 rounded-2xl mt-5 text-white bg-inherit "

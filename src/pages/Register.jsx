@@ -1,6 +1,22 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useActionData } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+
+// export const action = async ({ request }) => {
+//   const form = await request.formData();
+//   const displayName = form.get("name");
+//   const email = form.get("email");
+//   const password = form.get("password");
+//   return { displayName, email, password };
+// };
+// function Register() {
+//   const data = useActionData();
+//   useEffect(() => {
+//     if (data) {
+//       console.log(data);
+//     }
+//   }, [data]);
+// }
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -19,21 +35,21 @@ function Register() {
       !formData.password ||
       !formData.repeatPassword
     ) {
-      toast.warn("Barcha maydonlarni to'ldiring!");
+      toast.warn("Fill in all the fields!");
       return;
     }
 
     if (formData.password !== formData.repeatPassword) {
-      toast.error("Parollar mos kelmayapti!");
+      toast.error("Passwords do not match!");
       return;
     }
     if (formData.password.length <= 8) {
-      toast.error("Paroll 8ta belgidan kam bo'lmasin");
+      toast.error("Password should not be less than 8 characters");
       return;
     }
 
     console.log(formData);
-    toast.success("Ro'yxatdan o'tish muvaffaqiyatli!");
+    toast.success("Registration is successful!");
 
     setFormData({
       name: "",
