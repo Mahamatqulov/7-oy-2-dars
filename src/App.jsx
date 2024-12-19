@@ -9,6 +9,9 @@ import Home from "./pages/Home";
 import MainLayout from "./layout/MainLayout";
 import ProtectedRouter from "./components/ProtectedRouter";
 
+import { action as RegisterAction } from "./pages/Register";
+import { action as LoginAction } from "./pages/Login";
+
 function App() {
   const user = false;
   const router = createBrowserRouter([
@@ -29,10 +32,12 @@ function App() {
     {
       path: "/login",
       element: user ? <Navigate to="/" /> : <Login />,
+      action: LoginAction,
     },
     {
       path: "/register",
       element: user ? <Navigate to="/" /> : <Register />,
+      action: RegisterAction,
     },
   ]);
   return <RouterProvider router={router} />;

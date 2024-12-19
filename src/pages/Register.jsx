@@ -1,135 +1,102 @@
-import React, { useEffect, useState } from "react";
-import { Link, useActionData } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useActionData, Form } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import FormInput from "../components/FormInput";
+import useRegister from "../hooks/useRegister";
 
-// export const action = async ({ request }) => {
-//   const form = await request.formData();
-//   const displayName = form.get("name");
-//   const email = form.get("email");
-//   const password = form.get("password");
-//   return { displayName, email, password };
-// };
-// function Register() {
-//   const data = useActionData();
-//   useEffect(() => {
-//     if (data) {
-//       console.log(data);
-//     }
-//   }, [data]);
-// }
+export const action = async ({ request }) => {
+  const form = await request.formData();
+  const displayName = form.get("name");
+  const email = form.get("email");
+  const password = form.get("password");
+  return { displayName, email, password };
+};
 
 function Register() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    repeatPassword: "",
-  });
+  const { registerWithEmailAndPassword } = useRegister();
+  const data = useActionData();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    const registerUser = async () => {
+      if (data) {
+        if (!data.email || !data.password || !data.displayName) {
+          toast.error("Barcha maydonlarni to'ldirish shart!");
+          return;
+        }
 
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.password ||
-      !formData.repeatPassword
-    ) {
-      toast.warn("Fill in all the fields!");
-      return;
-    }
+        try {
+          await registerWithEmailAndPassword(
+            data.displayName,
+            data.email,
+            data.password
+          );
+          toast.success("Ro'yxatdan muvaffaqiyatli o'tdingiz! 👌");
+          return;
+        } catch (error) {
+          toast.error("Xato yuz berdi. Iltimos, qayta urinib ko'ring. 🤯");
+          return;
+        }
+      }
+    };
 
-    if (formData.password !== formData.repeatPassword) {
-      toast.error("Passwords do not match!");
-      return;
-    }
-    if (formData.password.length <= 8) {
-      toast.error("Password should not be less than 8 characters");
-      return;
-    }
-
-    console.log(formData);
-    toast.success("Registration is successful!");
-
-    setFormData({
-      name: "",
-      email: "",
-      password: "",
-      repeatPassword: "",
-    });
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+    registerUser();
+  }, [data, registerWithEmailAndPassword]);
 
   return (
-    <div className="mx-auto h-screen w-full bg-cover bg-center bg-no-repeat bg-[url('/img/rasm5.jpg')]">
-      {" "}
+    <div className="mx-auto h-screen w-full bg-cover bg-center bg-no-repeat bg-[url('/img/rasm18.jpeg')]">
       <ToastContainer />
-      <div className=" mx-auto max-w-[500px] p-10 place-items-center font-bold relative top-[130px] backdrop-blur-xl">
-        <form onSubmit={handleSubmit} className="text-black">
+      <div className="mx-auto max-w-[500px] p-5 place-items-center font-bold relative top-[50px] backdrop-blur-xl">
+        <Form action="" method="post">
           <h2 className="text-4xl text-center mb-5">Register</h2>
 
-          <input
+          <FormInput
             type="text"
-            id="name"
             name="name"
             placeholder="Name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full p-2 border border-blue-300 rounded-2xl mt-5 text-white bg-inherit "
+            label="Name"
+            className="w-full p-2 border border-blue-300 rounded-2xl mt-5 bg-inherit"
           />
 
-          <input
+          <FormInput
             type="email"
-            id="email"
             name="email"
             placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
+            label="Email"
             className="w-full p-2 border border-blue-300 rounded-2xl mt-5 bg-inherit"
           />
 
-          <input
+          <FormInput
             type="password"
-            id="password"
             name="password"
             placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
+            label="Password"
             className="w-full p-2 border border-blue-300 rounded-2xl mt-5 bg-inherit"
           />
 
-          <input
+          <FormInput
             type="password"
-            id="repeatPassword"
             name="repeatPassword"
             placeholder="Repeat Password"
-            value={formData.repeatPassword}
-            onChange={handleChange}
+            label="Repeat Password"
             className="w-full p-2 border border-blue-300 rounded-2xl mt-5 bg-inherit"
           />
 
           <button
             type="submit"
-            className="btn btn-primary btn-block mt-5 rounded-2xl py-2 bg-blue-500 text-white "
+            className="btn btn-primary btn-block mt-5 rounded-2xl py-2 bg-blue-500 text-white"
           >
             Register
           </button>
+
           <div className="text-center mt-5">
             <p>
-              If you have accounter,
+              If you have an account,
               <Link className="link link-primary" to="/login">
                 Login
               </Link>
             </p>
           </div>
-        </form>
+        </Form>
       </div>
     </div>
   );

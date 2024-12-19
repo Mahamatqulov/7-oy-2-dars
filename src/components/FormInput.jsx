@@ -7,7 +7,7 @@ function FormInput({ type, label, placeholder, name }) {
       <input
         type={type}
         placeholder={placeholder}
-        className="input input-bordered w-full bg-inherit"
+        className="input input-bordered w-[380px] p-2 border border-blue-300 rounded-2xl  bg-inherit "
         name={name}
       />
     </label>
