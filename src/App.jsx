@@ -11,9 +11,10 @@ import ProtectedRouter from "./components/ProtectedRouter";
 
 import { action as RegisterAction } from "./pages/Register";
 import { action as LoginAction } from "./pages/Login";
+import { useSelector } from "react-redux";
 
 function App() {
-  const user = false;
+  const { user } = useSelector((store) => store.user);
   const router = createBrowserRouter([
     {
       path: "/",

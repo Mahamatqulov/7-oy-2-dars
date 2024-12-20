@@ -23,6 +23,10 @@ function Register() {
           toast.error("Barcha maydonlarni to'ldirish shart!");
           return;
         }
+        if (data.password !== data.repeatPassword) {
+          toast.error("Parollar bir biriga mos kelmayabdi 🤯");
+          return;
+        }
 
         try {
           await registerWithEmailAndPassword(
