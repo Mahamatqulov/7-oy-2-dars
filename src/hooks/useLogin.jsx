@@ -2,9 +2,9 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/config";
 
 export const useLogin = () => {
-  const loginWithEmailAndPassword = () => {
+  const loginWithEmailAndPassword = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
-      .then(async (profile) => {
+      .then((profile) => {
         console.log(profile.user);
       })
       .catch((error) => {

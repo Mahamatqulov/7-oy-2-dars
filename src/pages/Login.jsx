@@ -1,8 +1,8 @@
-import { Link, useActionData, Form } from "react-router-dom";
 import React, { useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { Link, useActionData, Form } from "react-router-dom";
+import { toast } from "react-toastify";
 import FormInput from "../components/FormInput";
-import useRegister from "../hooks/useRegister";
+import { useLogin } from "../hooks/useLogin";
 
 export const action = async ({ request }) => {
   const form = await request.formData();
@@ -10,34 +10,24 @@ export const action = async ({ request }) => {
   const password = form.get("password");
   return { email, password };
 };
-function Login() {
-  const { registerWithEmailAndPassword } = useRegister();
-  const data = useActionData();
-  useEffect(() => {
-    const registerUser = async () => {
-      if (data) {
-        if (!data.email || !data.password) {
-          toast.error("Barcha maydonlarni to'ldirish shart!");
-          return;
-        }
-        try {
-          await registerWithEmailAndPassword(data.email, data.password);
-          toast.success("Ro'yxatdan muvaffaqiyatli o'tdingiz! 👌");
-        } catch (error) {
-          toast.error("Xato yuz berdi. Iltimos, qayta urinib ko'ring. 🤯");
-        }
-      }
-    };
 
-    registerUser();
-  }, [data, registerWithEmailAndPassword]);
+function Login() {
+  const data = useActionData();
+  const { loginWithEmailAndPassword } = useLogin();
+
+  useEffect(() => {
+    if (data) {
+      if (!data.email || !data.password) {
+        toast.error("Barcha maydonlarni to'ldirish shart!");
+        return;
+      }
+      loginWithEmailAndPassword(data.email, data.password);
+    }
+  }, [data]);
+
   return (
     <div className="mx-auto h-screen w-full bg-cover bg-center bg-no-repeat bg-[url('/img/rasm11.jpeg')]">
-      <ToastContainer />
-      <div
-        className="flex items-center mx-auto h-[550px] max-w-xl rounded-full place-items-center w-full font-bold relative top-[90px] backdrop-blur-2xl
-      "
-      >
+      <div className="flex items-center mx-auto h-[550px] max-w-xl rounded-full place-items-center w-full font-bold relative top-[90px] backdrop-blur-2xl">
         <Form
           action=""
           method="post"
@@ -61,8 +51,8 @@ function Login() {
           <button className="btn btn-primary btn-block mt-5">Login</button>
           <div className="text-center mt-5">
             <p>
-              If you have accounter,
-              <Link className="link link-primary" to="/Register">
+              If you have an account,
+              <Link className="link link-primary" to="/register">
                 Register
               </Link>
             </p>

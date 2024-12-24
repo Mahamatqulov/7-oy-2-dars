@@ -11,10 +11,15 @@ import ProtectedRouter from "./components/ProtectedRouter";
 
 import { action as RegisterAction } from "./pages/Register";
 import { action as LoginAction } from "./pages/Login";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { authReadyAct, login } from "./app/features/userSlice";
+import { auth } from "./firebase/config";
 
 function App() {
-  const { user } = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+  const { user, authReady } = useSelector((store) => store.user);
   const router = createBrowserRouter([
     {
       path: "/",
@@ -41,7 +46,15 @@ function App() {
       action: RegisterAction,
     },
   ]);
-  return <RouterProvider router={router} />;
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      dispatch(login(user));
+      dispatch(authReadyAct());
+    });
+  }, []);
+
+  return <> {authReady && <RouterProvider router={router} />}</>;
 }
 
 export default App;

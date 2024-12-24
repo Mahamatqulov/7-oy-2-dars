@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useActionData, Form } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import FormInput from "../components/FormInput";
 import useRegister from "../hooks/useRegister";
 
@@ -9,46 +9,30 @@ export const action = async ({ request }) => {
   const displayName = form.get("name");
   const email = form.get("email");
   const password = form.get("password");
-  return { displayName, email, password };
+  const repeatPassword = form.get("repeatPassword");
+  return { displayName, email, password, repeatPassword };
 };
 
 function Register() {
   const { registerWithEmailAndPassword } = useRegister();
   const data = useActionData();
-
   useEffect(() => {
-    const registerUser = async () => {
-      if (data) {
-        if (!data.email || !data.password || !data.displayName) {
-          toast.error("Barcha maydonlarni to'ldirish shart!");
-          return;
-        }
-        if (data.password !== data.repeatPassword) {
-          toast.error("Parollar bir biriga mos kelmayabdi 🤯");
-          return;
-        }
-
-        try {
-          await registerWithEmailAndPassword(
-            data.displayName,
-            data.email,
-            data.password
-          );
-          toast.success("Ro'yxatdan muvaffaqiyatli o'tdingiz! 👌");
-          return;
-        } catch (error) {
-          toast.error("Xato yuz berdi. Iltimos, qayta urinib ko'ring. 🤯");
-          return;
-        }
+    if (data) {
+      if (!data.email || !data.password || !data.displayName) {
+        toast.error("Barcha maydonlarni to'ldirish shart!");
+        return;
       }
-    };
-
-    registerUser();
-  }, [data, registerWithEmailAndPassword]);
+      if (data.password !== data.repeatPassword) {
+        toast.error("Parollar bir biriga mos kelmayabdi 🤯");
+        return;
+      }
+      toast.success("Ro'yxatdan muvofiqatli o'tdingiz");
+      registerWithEmailAndPassword(data.displayName, data.email, data.password);
+    }
+  }, [data]);
 
   return (
     <div className="mx-auto h-screen w-full bg-cover bg-center bg-no-repeat bg-[url('/img/rasm18.jpeg')]">
-      <ToastContainer />
       <div className="mx-auto max-w-[500px] p-5 place-items-center font-bold relative top-[50px] backdrop-blur-xl">
         <Form action="" method="post">
           <h2 className="text-4xl text-center mb-5">Register</h2>

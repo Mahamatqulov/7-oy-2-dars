@@ -5,12 +5,12 @@ export const store = configureStore({
   reducer: {
     user: useReducer,
   },
-  //   middleware: (getDefaultMiddleware) => {
-  //     getDefaultMiddleware({
-  //       serializableCheck: {
-  //         ignoredPaths: ["user.user"],
-  //         ignoredActions: ["user/login"],
-  //       },
-  //     });
-  //   },
+  // middleware: (getDefaultMiddleware) => {
+  //   getDefaultMiddleware({
+  //     serializableCheck: {
+  //       ignoredPaths: ["user.user"],
+  //       ignoredActions: ["user/login"],
+  //     },
+  //   });
+  // },
 });
