@@ -1,14 +1,18 @@
 import { Outlet } from "react-router-dom";
-import { Navbar, Footer } from "../components";
+import { Navbar } from "../components";
+import Sidebar from "../components/Sidebar";
+import OnlineUsers from "../components/OnlineUsers";
 
 function MainLayout() {
   return (
-    <div>
-      <Navbar />
+    <div className="flex justify-between">
+      <Sidebar />
       <main>
+        <Navbar />
         <Outlet />
+        {/* <Footer /> */}
       </main>
-      <Footer />
+      <OnlineUsers />
     </div>
   );
 }

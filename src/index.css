@@ -3,18 +3,7 @@
 @tailwind utilities;
 
 @layer components {
-  html,
-  body,
-  #root {
-    @apply h-full;
-  }
-  #root {
-    @apply flex flex-col;
-  }
-  main {
-    @apply grow;
-  }
-  .align-elements {
-    @apply max-w-6xl mx-auto px-5 w-full;
+  .nav-item .active {
+    @apply bg-white text-black;
   }
 }

@@ -6,6 +6,7 @@ import {
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
+import Create from "./pages/Create";
 import MainLayout from "./layout/MainLayout";
 import ProtectedRouter from "./components/ProtectedRouter";
 
@@ -32,6 +33,10 @@ function App() {
         {
           index: true,
           element: <Home />,
+        },
+        {
+          path: "/create",
+          element: <Create />,
         },
       ],
     },

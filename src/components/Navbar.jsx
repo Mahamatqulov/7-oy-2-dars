@@ -1,15 +1,13 @@
 import React from "react";
 import { useSignout } from "../hooks/useSignout";
+import { useSelector } from "react-redux";
 
 function Navbar() {
   const { userSignout } = useSignout();
-
+  const { user } = useSelector((store) => store.user);
   return (
-    <div className="align-elements">
+    <div className="">
       <div className="navbar bg-base-100">
-        <div className="flex-1">
-          <a className="btn btn-ghost text-xl">Users</a>
-        </div>
         <div className="flex-none gap-2">
           <div className="form-control">
             <input
@@ -26,10 +24,7 @@ function Navbar() {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img
-                  alt="User Avatar"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                />
+                <img alt="User Avatar" src={user.photoURL} />
               </div>
             </div>
             <ul
