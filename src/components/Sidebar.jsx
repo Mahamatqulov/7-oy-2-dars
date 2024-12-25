@@ -10,7 +10,7 @@ function Sidebar() {
   const { user } = useSelector((store) => store.user);
   const { userSignout } = useSignout();
   return (
-    <div className="bg-blue-400 h-screen w-[300px] text-white flex flex-col">
+    <div className="bg-gray-700 h-screen w-[300px] text-white flex flex-col">
       <Avatar user={user} />
       <ul className="flex flex-col pr-0 pl-10 mb-auto">
         <li className="nav-item">
