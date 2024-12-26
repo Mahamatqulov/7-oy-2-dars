@@ -5,6 +5,8 @@ import { NavLink } from "react-router-dom";
 import { useSignout } from "../hooks/useSignout";
 import { BsPersonFillAdd } from "react-icons/bs";
 import { GoProjectRoadmap } from "react-icons/go";
+import { CiLogout } from "react-icons/ci";
+import { IoSettingsOutline } from "react-icons/io5";
 
 function Sidebar() {
   const { user } = useSelector((store) => store.user);
@@ -28,12 +30,17 @@ function Sidebar() {
           </NavLink>
         </li>
       </ul>
+      <div className="mb-2  flex justify-center">
+        <button className="btn btn-outline text-white w-[250px] flex items-center gap-3">
+          <IoSettingsOutline className="text-xl" /> Settings
+        </button>
+      </div>
       <div className="mb-10  flex justify-center">
         <button
           onClick={userSignout}
-          className="btn btn-outline text-white w-[250px]"
+          className="btn btn-outline text-white w-[250px] flex items-center gap-3"
         >
-          Logout
+          <CiLogout className="text-xl" /> Logout
         </button>
       </div>
     </div>

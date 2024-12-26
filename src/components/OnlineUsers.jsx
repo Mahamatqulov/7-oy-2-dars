@@ -5,14 +5,14 @@ function OnlineUsers() {
   const { documents } = useCollection("users");
   console.log(documents);
   return (
-    <div className="w-[250px] bg-gray-700 p-10">
+    <div className="max-w-[340px] w-fulls bg-gray-700 p-10">
       <ul>
         {documents &&
           documents.map((doc) => {
             return (
               <li key={doc.id}>
                 <div className="flex items-center mb-3 gap-3  btn-outline btn-info rounded-full">
-                  <div className="avatar">
+                  <div className="avatar w-10">
                     <div className="ring-primary ring-offset-base-100 w-8 rounded-full ring ring-offset-2 online placeholder">
                       <img src={doc.photoURL} />
                     </div>

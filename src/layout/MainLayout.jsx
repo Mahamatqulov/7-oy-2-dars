@@ -10,7 +10,6 @@ function MainLayout() {
       <main>
         <Navbar />
         <Outlet />
-        {/* <Footer /> */}
       </main>
       <OnlineUsers />
     </div>

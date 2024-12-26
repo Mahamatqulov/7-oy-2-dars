@@ -12,6 +12,8 @@ import ProtectedRouter from "./components/ProtectedRouter";
 
 import { action as RegisterAction } from "./pages/Register";
 import { action as LoginAction } from "./pages/Login";
+import { action as CreateAction } from "./pages/Create";
+
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
@@ -37,6 +39,7 @@ function App() {
         {
           path: "/create",
           element: <Create />,
+          action: CreateAction,
         },
       ],
     },
