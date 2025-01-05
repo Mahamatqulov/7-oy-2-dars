@@ -10,6 +10,7 @@ export function useSignout() {
   const { user } = useSelector((store) => store.user);
   const userSignout = async () => {
     let ref = doc(db, "users", user.uid);
+
     await updateDoc(ref, {
       online: false,
     });

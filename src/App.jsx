@@ -9,6 +9,8 @@ import Home from "./pages/Home";
 import Create from "./pages/Create";
 import MainLayout from "./layout/MainLayout";
 import ProtectedRouter from "./components/ProtectedRouter";
+import About from "./pages/About";
+import Settings from "./pages/Settings";
 
 import { action as RegisterAction } from "./pages/Register";
 import { action as LoginAction } from "./pages/Login";
@@ -40,6 +42,14 @@ function App() {
           path: "/create",
           element: <Create />,
           action: CreateAction,
+        },
+        {
+          path: "/about/:id",
+          element: <About />,
+        },
+        {
+          path: "/settings",
+          element: <Settings />,
         },
       ],
     },

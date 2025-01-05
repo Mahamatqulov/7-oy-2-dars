@@ -1,35 +1,41 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useActionData, Form } from "react-router-dom";
-import { toast } from "react-toastify";
 import FormInput from "../components/FormInput";
 import useRegister from "../hooks/useRegister";
+import { validateSignupOrLoginData } from "../utils";
 
 export const action = async ({ request }) => {
   const form = await request.formData();
   const displayName = form.get("name");
   const email = form.get("email");
   const password = form.get("password");
-  const repeatPassword = form.get("repeatPassword");
-  return { displayName, email, password, repeatPassword };
+  const confirmPassword = form.get("confirmPassword");
+  return { displayName, email, password, confirmPassword };
 };
 
 function Register() {
+  const [error, setError] = useState({
+    displayName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const { registerWithEmailAndPassword } = useRegister();
-  const data = useActionData();
+  const signupActionData = useActionData();
   useEffect(() => {
-    if (data) {
-      if (!data.email || !data.password || !data.displayName) {
-        toast.error("Barcha maydonlarni to'ldirish shart!");
-        return;
+    if (signupActionData) {
+      const { valid, errors } = validateSignupOrLoginData(
+        signupActionData,
+        true
+      );
+      if (valid) {
+        const { displayName, email, password } = signupActionData;
+        registerWithEmailAndPassword(displayName, email, password);
+      } else {
+        setError(errors);
       }
-      if (data.password !== data.repeatPassword) {
-        toast.error("Parollar bir biriga mos kelmayabdi 🤯");
-        return;
-      }
-      toast.success("Ro'yxatdan muvofiqatli o'tdingiz");
-      registerWithEmailAndPassword(data.displayName, data.email, data.password);
     }
-  }, [data]);
+  }, [signupActionData]);
 
   return (
     <div className="mx-auto h-screen w-full bg-cover bg-center bg-no-repeat bg-[url('/img/rasm18.jpeg')]">
@@ -43,6 +49,8 @@ function Register() {
             placeholder="Name"
             label="Name"
             className="w-full p-2 border border-blue-300 rounded-2xl mt-5 bg-inherit"
+            error={error.displayName && "input-error"}
+            errorText={error.displayName}
           />
 
           <FormInput
@@ -51,6 +59,8 @@ function Register() {
             placeholder="Email"
             label="Email"
             className="w-full p-2 border border-blue-300 rounded-2xl mt-5 bg-inherit"
+            error={error.email && "input-error"}
+            errorText={error.email}
           />
 
           <FormInput
@@ -59,14 +69,18 @@ function Register() {
             placeholder="Password"
             label="Password"
             className="w-full p-2 border border-blue-300 rounded-2xl mt-5 bg-inherit"
+            error={error.password && "input-error"}
+            errorText={error.password}
           />
 
           <FormInput
             type="password"
-            name="repeatPassword"
+            name="confirmPassword"
             placeholder="Repeat Password"
             label="Repeat Password"
             className="w-full p-2 border border-blue-300 rounded-2xl mt-5 bg-inherit"
+            error={error.confirmPassword && "input-error"}
+            errorText={error.confirmPassword}
           />
 
           <button

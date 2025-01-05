@@ -1,7 +1,7 @@
 import React from "react";
 import Avatar from "./Avatar";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useSignout } from "../hooks/useSignout";
 import { BsPersonFillAdd } from "react-icons/bs";
 import { GoProjectRoadmap } from "react-icons/go";
@@ -12,7 +12,7 @@ function Sidebar() {
   const { user } = useSelector((store) => store.user);
   const { userSignout } = useSignout();
   return (
-    <div className="bg-gray-700 h-screen w-[300px] text-white flex flex-col">
+    <div className="bg-gray-900 h-screen w-[300px] text-white flex flex-col">
       <Avatar user={user} />
       <ul className="flex flex-col pr-0 pl-10 mb-auto">
         <li className="nav-item">
@@ -31,9 +31,12 @@ function Sidebar() {
         </li>
       </ul>
       <div className="mb-2  flex justify-center">
-        <button className="btn btn-outline text-white w-[250px] flex items-center gap-3">
+        <Link
+          to="/settings"
+          className="btn btn-outline text-white w-[250px] flex items-center gap-3"
+        >
           <IoSettingsOutline className="text-xl" /> Settings
-        </button>
+        </Link>
       </div>
       <div className="mb-10  flex justify-center">
         <button

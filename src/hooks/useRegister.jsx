@@ -15,7 +15,7 @@ export default function useRegister() {
 
     await updateProfile(auth.currentUser, {
       displayName: displayName,
-      photoURL: "https://api.dicebear.com/9.x/dylan/svg?seed=" + uuid(),
+      photoURL: "https://api.dicebear.com/9.x/adventurer/svg?seed=" + uuid(),
     });
 
     await setDoc(doc(db, "users", res.user.uid), {

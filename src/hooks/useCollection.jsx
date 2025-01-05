@@ -12,7 +12,6 @@ export function useCollection(collectionName) {
         data.push({ id: snapshot.id, ...snapshot.data() });
       });
       setDocuments(data);
-      console.log(setDocuments);
     });
   }, [collectionName]);
 

@@ -1,4 +1,4 @@
-function FormTextare({ label }) {
+function FormTextare({ label, name }) {
   return (
     <div>
       <label className="form-control">
@@ -6,8 +6,9 @@ function FormTextare({ label }) {
           <span className="label-text">{label}</span>
         </div>
         <textarea
-          className="textarea textarea-bordered  border-blue-300 h-24"
+          className="textarea textarea-bordered  border-blue-300 h-18"
           placeholder="Type here"
+          name={name}
         ></textarea>
       </label>
     </div>

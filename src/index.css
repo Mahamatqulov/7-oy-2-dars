@@ -4,6 +4,6 @@
 
 @layer components {
   .nav-item .active {
-    @apply bg-white text-black;
+    @apply bg-blue-500 text-black;
   }
 }
