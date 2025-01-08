@@ -3,7 +3,6 @@ import { Link, useActionData, Form } from "react-router-dom";
 import { toast } from "react-toastify";
 import FormInput from "../components/FormInput";
 import { useLogin } from "../hooks/useLogin";
-
 export const action = async ({ request }) => {
   const form = await request.formData();
   const email = form.get("email");
@@ -15,10 +14,22 @@ function Login() {
   const data = useActionData();
   const { loginWithEmailAndPassword } = useLogin();
 
+  const notify = () =>
+    toast.error("Barcha maydonlarni to'ldirish shart!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+
   useEffect(() => {
     if (data) {
       if (!data.email || !data.password) {
-        toast.error("Barcha maydonlarni to'ldirish shart!");
+        notify();
         return;
       }
       loginWithEmailAndPassword(data.email, data.password);
@@ -49,6 +60,7 @@ function Login() {
             className="w-full p-2 border border-blue-300 rounded-2xl mt-5 bg-inherit"
           />
           <button className="btn btn-primary btn-block mt-5">Login</button>
+
           <div className="text-center mt-5">
             <p>
               If you have an account,

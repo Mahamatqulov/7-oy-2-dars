@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import { useCollection } from "../hooks/useCollection";
+
 function Home() {
   const { documents } = useCollection("projects");
 
   return (
     <div className="flex flex-col items-center px-5">
-      <h1 className="text-4xl font-bold text-blue-600 mb-10">Dashboard</h1>
+      {/* Dashboard Title */}
+      <h1 className="text-4xl font-bold text-blue-500 mb-10">Dashboard</h1>
 
+      {/* Project Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-[1200px]">
         {documents &&
           documents.map((doc) => {
@@ -14,29 +17,37 @@ function Home() {
               <Link
                 to={`/about/${doc.id}`}
                 key={doc.id}
-                className="card bg-inherit w-full shadow-lg rounded-lg border border-blue-500 overflow-hidden"
+                className="group card bg-gray-800 shadow-lg rounded-lg border border-gray-700 hover:border-blue-500 transition-all duration-300 overflow-hidden"
               >
                 <div className="card-body p-6">
-                  <h2 className="card-title text-xl font-semibold text-gray-400 mb-4">
+                  {/* Project Title */}
+                  <h2 className="card-title text-2xl font-semibold text-gray-300 group-hover:text-blue-500 mb-4 transition-colors">
                     {doc.name}
                   </h2>
-                  <p className="text-gray-300 mb-4">
+
+                  {/* Due Date */}
+                  <p className="text-gray-400 mb-4">
                     Due Date:
-                    <span className="font-medium text-blue-600">
+                    <span className="font-medium text-blue-400 ml-2">
                       {new Date(doc.dueTo.toDate()).toLocaleDateString()}
                     </span>
                   </p>
-                  <hr className="" />
-                  <div className="avatar-group -space-x-6 rtl:space-x-reverse ">
-                    {doc.assignedUsers.map((u) => {
-                      return (
-                        <div key={u.photoURL} className="avatar border-none">
-                          <div className="w-12">
-                            <img src={u.photoURL} />
-                          </div>
-                        </div>
-                      );
-                    })}
+                  <hr className="border-gray-600 mb-4" />
+
+                  {/* Assigned Users */}
+                  <div className="flex -space-x-4">
+                    {doc.assignedUsers.map((u) => (
+                      <div
+                        key={u.photoURL}
+                        className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-700 group-hover:border-blue-400"
+                      >
+                        <img
+                          src={u.photoURL}
+                          alt={`${u.name} avatar`}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </Link>

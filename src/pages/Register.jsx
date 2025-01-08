@@ -3,6 +3,8 @@ import { Link, useActionData, Form } from "react-router-dom";
 import FormInput from "../components/FormInput";
 import useRegister from "../hooks/useRegister";
 import { validateSignupOrLoginData } from "../utils";
+import { FcGoogle } from "react-icons/fc";
+import { useAuthWithGoogle } from "../hooks/useAuthWithGoogle";
 
 export const action = async ({ request }) => {
   const form = await request.formData();
@@ -14,6 +16,7 @@ export const action = async ({ request }) => {
 };
 
 function Register() {
+  const { googleAuth, isPending } = useAuthWithGoogle();
   const [error, setError] = useState({
     displayName: "",
     email: "",
@@ -39,16 +42,16 @@ function Register() {
 
   return (
     <div className="mx-auto h-screen w-full bg-cover bg-center bg-no-repeat bg-[url('/img/rasm18.jpeg')]">
-      <div className="mx-auto max-w-[500px] p-5 place-items-center font-bold relative top-[50px] backdrop-blur-xl">
+      <div className="mx-auto max-w-[500px] p-5 place-items-center font-bold relative top-[10px] backdrop-blur-xl">
         <Form action="" method="post">
-          <h2 className="text-4xl text-center mb-5">Register</h2>
+          <h2 className="text-4xl text-center mb-1">Register</h2>
 
           <FormInput
             type="text"
             name="name"
             placeholder="Name"
             label="Name"
-            className="w-full p-2 border border-blue-300 rounded-2xl mt-5 bg-inherit"
+            className="w-full p-2 border border-blue-300 rounded-2xl mt-3 bg-inherit"
             error={error.displayName && "input-error"}
             errorText={error.displayName}
           />
@@ -58,7 +61,7 @@ function Register() {
             name="email"
             placeholder="Email"
             label="Email"
-            className="w-full p-2 border border-blue-300 rounded-2xl mt-5 bg-inherit"
+            className="w-full p-2 border border-blue-300 rounded-2xl mt-3 bg-inherit"
             error={error.email && "input-error"}
             errorText={error.email}
           />
@@ -68,7 +71,7 @@ function Register() {
             name="password"
             placeholder="Password"
             label="Password"
-            className="w-full p-2 border border-blue-300 rounded-2xl mt-5 bg-inherit"
+            className="w-full p-2 border border-blue-300 rounded-2xl mt-3 bg-inherit"
             error={error.password && "input-error"}
             errorText={error.password}
           />
@@ -78,17 +81,29 @@ function Register() {
             name="confirmPassword"
             placeholder="Repeat Password"
             label="Repeat Password"
-            className="w-full p-2 border border-blue-300 rounded-2xl mt-5 bg-inherit"
+            className="w-full p-2 border border-blue-300 rounded-2xl mt-3 bg-inherit"
             error={error.confirmPassword && "input-error"}
             errorText={error.confirmPassword}
           />
 
-          <button
-            type="submit"
-            className="btn btn-primary btn-block mt-5 rounded-2xl py-2 bg-blue-500 text-white"
-          >
-            Register
-          </button>
+          <div className="my-5 flex flex-col gap-3">
+            <button
+              disabled={isPending}
+              type="submit"
+              className="btn btn-primary btn-block mt-1 rounded-2xl py-2 bg-blue-500 text-white"
+            >
+              Register
+            </button>
+            <button
+              disabled={isPending}
+              type="button"
+              onClick={googleAuth}
+              className="btn btn-primary btn-block rounded-2xl py-2"
+            >
+              <FcGoogle className="text-2xl" />
+              {isPending ? "Loding.." : "Google"}
+            </button>
+          </div>
 
           <div className="text-center mt-5">
             <p>

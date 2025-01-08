@@ -1,9 +1,17 @@
-import { collection, addDoc } from "firebase/firestore";
+import {
+  collection,
+  updateDoc,
+  deleteDoc,
+  addDoc,
+  doc,
+} from "firebase/firestore";
 import { db } from "../firebase/config";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function useFirestore(collectionName) {
+  const navigate = useNavigate();
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
   const addDocument = async (data) => {
@@ -22,10 +30,9 @@ function useFirestore(collectionName) {
     try {
       await deleteDoc(doc(db, collectionName, id));
       toast.success("Document successfully deleted!");
+      navigate("/");
     } catch (error) {
       toast.error("Error removing document: ", error);
-    } finally {
-      navigate("/");
     }
   };
   const updateDocument = async (document, id) => {

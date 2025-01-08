@@ -1,26 +1,38 @@
-import React from "react";
 import { useCollection } from "../hooks/useCollection";
 
 function OnlineUsers() {
   const { documents } = useCollection("users");
   return (
-    <div className="max-w-[340px] w-fulls bg-gray-900 p-10">
-      <h1 className="text-center text-3xl font-medium text-blue-500 mb-10">
+    <div className="max-w-sm w-full bg-gray-800 p-6 rounded-lg shadow-lg">
+      <h1 className="text-center text-2xl font-semibold text-blue-400 mb-6">
         Online Users
       </h1>
       <ul>
         {documents &&
           documents.map((doc) => {
             return (
-              <li key={doc.id}>
-                <div className="flex items-center mb-3 gap-3  btn-outline btn-info rounded-full">
-                  <div className="avatar w-[30px]">
-                    <div className="ring-primary ring-offset-base-100 w-8 rounded-full ring ring-offset-2 online placeholder">
-                      <img src={doc.photoURL} />
-                    </div>
+              <li key={doc.id} className="mb-4">
+                <div className="flex items-center gap-4 p-3 bg-gray-700 rounded-lg hover:shadow-md transition-shadow">
+                  <div className="relative w-12 h-12">
+                    <img
+                      className="w-full h-full rounded-full ring-2 ring-blue-500"
+                      src={doc.photoURL}
+                      alt={`${doc.displayName}'s avatar`}
+                    />
+                    {doc.online && (
+                      <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full ring-2 ring-gray-800"></span>
+                    )}
                   </div>
-                  <p>{doc.displayName}</p>
-                  <p>{doc.online ? "on" : "off"}</p>
+                  <div>
+                    <p className="text-white font-medium">{doc.displayName}</p>
+                    <p
+                      className={`text-sm ${
+                        doc.online ? "text-green-400" : "text-gray-400"
+                      }`}
+                    >
+                      {doc.online ? "Online" : "yaqinda online edi"}
+                    </p>
+                  </div>
                 </div>
               </li>
             );

@@ -1,120 +1,3 @@
-// import { Form, useActionData, useNavigate } from "react-router-dom";
-// import FormInput from "../components/FormInput";
-// import FormTextare from "../components/FormTextare";
-// import Select from "react-select";
-// import makeAnimated from "react-select/animated";
-// import { useEffect, useState } from "react";
-// import { serverTimestamp } from "firebase/firestore";
-// import { Timestamp } from "firebase/firestore";
-// import { useFirestore } from "../hooks/useFirestore";
-// import { useCollection } from "../hooks/useCollection";
-
-// const animatedComponents = makeAnimated();
-
-// export async function action({ request }) {
-//   const form = await request.formData();
-//   const name = form.get("name");
-//   const description = form.get("description");
-//   const dueTo = Timestamp.fromDate(new Date(form.get("dueTo")));
-//   return { name, description, dueTo };
-// }
-
-// const projectTypes = [
-//   {
-//     value: "frontend",
-//     label: "Frontend",
-//   },
-//   {
-//     value: "Backend",
-//     label: "Backend",
-//   },
-//   {
-//     value: "marketing",
-//     label: "Marketing",
-//   },
-//   {
-//     value: "smm",
-//     label: "SMM",
-//   },
-//   {
-//     value: "Dizayn",
-//     label: "dizayn",
-//   },
-// ];
-
-// function Create() {
-//   const navigate = useNavigate();
-//   const { addDocument } = useFirestore("project");
-//   const { documents } = useCollection("users");
-//   const createActionData = useActionData();
-//   const [assignedUsers, setAssignedUsers] = useState([]);
-//   const [projectType, setProjectType] = useState([]);
-//   const [users, setUsers] = useState([]);
-
-//   useEffect(() => {
-//     setUsers(
-//       documents?.map((document) => {
-//         return { value: { ...document }, label: document.displayName };
-//       })
-//     );
-//   }, [documents]);
-
-//   const selectUser = (user) => {
-//     setAssignedUsers(user);
-//   };
-
-//   const selectProject = (type) => {
-//     setProjectType(type.value);
-//   };
-
-//   useEffect(() => {
-//     if (createActionData) {
-//       addDocument("project", {
-//         ...createActionData,
-//         assignedUsers: assignedUsers.map((au) => au.value),
-//         projectType,
-//         createdAt: serverTimestamp(new Date()),
-//       }).then(() => {
-//         navigate("/");
-//       });
-//     }
-//   }, [createActionData]);
-
-//   return (
-//     <div className="">
-//       <h2 className="text-xl font-semibold">Create a new Project</h2>
-//       <Form method="post" className="flex flex-col gap-7 max-w-[400px]">
-//         <FormInput
-//           label="Project name"
-//           type="text"
-//           name="name"
-//           placeholder="write project name here"
-//         />
-//         <FormTextare label="Project description" name="description" />
-//         <FormInput label="Set due to" type="date" name="dueTo" />
-//         <Select
-//           components={animatedComponents}
-//           isMulti
-//           options={projectTypes}
-//           onChange={selectUser}
-//         />
-//         <Select
-//           components={animatedComponents}
-//           options={users}
-//           isMulti
-//           onChange={selectProject}
-//         />
-
-//         <div className="flex justify-end">
-//           <button className="btn btn-primary">Add project</button>
-//         </div>
-//       </Form>
-//     </div>
-//   );
-// }
-
-// export default Create;
-
 import FormInput from "../components/FormInput";
 import { Form, useActionData, useNavigate } from "react-router-dom";
 import FormTextare from "../components/FormTextare";
@@ -145,7 +28,7 @@ const projectTypes = [
   { value: "design", label: "Design" },
 ];
 
-function create() {
+function Create() {
   const navigate = useNavigate();
   const { addDocument } = useFirestore("projects");
   const { documents } = useCollection("users");
@@ -213,6 +96,7 @@ function create() {
       navigate("/");
     }
   }, [createActionData]);
+
   const customStyles = {
     control: (provided) => ({
       ...provided,
@@ -223,42 +107,44 @@ function create() {
   };
 
   return (
-    <div className="">
-      <h2 className="text-4xl font-semibold text-center mb-5 text-blue-600 ">
-        Enter a project
-      </h2>
-      <Form method="post" className="flex flex-col gap-5 max-w-[400px">
-        <FormInput
-          name="name"
-          label="Project Name"
-          type="text"
-          placeholder="Enter project name here"
-        />
-        <FormTextare label="Project Description" name="description" />
-        <FormInput label="Set Due Date" type="date" name="dueTo" />
+    <div className=" min-h-screen flex items-center justify-center -mt-16">
+      <div className="bg-inherit p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-4xl font-semibold text-center mb-5 text-blue-600">
+          Enter a project
+        </h2>
+        <Form method="post" className="flex flex-col gap-5">
+          <FormInput
+            name="name"
+            label="Project Name"
+            type="text"
+            placeholder="Enter project name here"
+          />
+          <FormTextare label="Project Description" name="description" />
+          <FormInput label="Set Due Date" type="date" name="dueTo" />
 
-        <Select
-          onChange={selectProjectType}
-          options={projectTypes}
-          isMulti
-          components={animatedComponents}
-          styles={customStyles}
-        />
+          <Select
+            onChange={selectProjectType}
+            options={projectTypes}
+            isMulti
+            components={animatedComponents}
+            styles={customStyles}
+          />
 
-        <Select
-          onChange={selectUser}
-          options={users}
-          isMulti
-          components={animatedComponents}
-          styles={customStyles}
-        />
+          <Select
+            onChange={selectUser}
+            options={users}
+            isMulti
+            components={animatedComponents}
+            styles={customStyles}
+          />
 
-        <div className="flex justify-end">
-          <button className="btn btn-primary">Add project</button>
-        </div>
-      </Form>
+          <div className="flex justify-end">
+            <button className="btn btn-primary">Add project</button>
+          </div>
+        </Form>
+      </div>
     </div>
   );
 }
 
-export default create;
+export default Create;
