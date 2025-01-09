@@ -9,6 +9,7 @@ import { Timestamp } from "firebase/firestore";
 import { serverTimestamp } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { useCollection } from "../hooks/useCollection";
+import { comment } from "postcss";
 
 const animatedComponents = makeAnimated();
 
@@ -89,6 +90,7 @@ function Create() {
     if (createActionData && handleValidation()) {
       addDocument({
         ...createActionData,
+        comments: [],
         assignedUsers: assignedUsers.map((au) => au.value),
         projectType: projectType.map((tt) => tt.value),
         createdAt: serverTimestamp(new Date()),

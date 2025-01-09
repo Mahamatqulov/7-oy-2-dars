@@ -11,6 +11,7 @@ import MainLayout from "./layout/MainLayout";
 import ProtectedRouter from "./components/ProtectedRouter";
 import About from "./pages/About";
 import Settings from "./pages/Settings";
+import ErrorPage from "./pages/About";
 
 import { action as RegisterAction } from "./pages/Register";
 import { action as LoginAction } from "./pages/Login";
@@ -28,6 +29,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
+      errorElement: <ErrorPage />,
       element: (
         <ProtectedRouter user={user}>
           <MainLayout />
@@ -57,11 +59,13 @@ function App() {
       path: "/login",
       element: user ? <Navigate to="/" /> : <Login />,
       action: LoginAction,
+      errorElement: <ErrorPage />,
     },
     {
       path: "/register",
       element: user ? <Navigate to="/" /> : <Register />,
       action: RegisterAction,
+      errorElement: <ErrorPage />,
     },
   ]);
 

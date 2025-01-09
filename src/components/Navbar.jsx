@@ -1,6 +1,7 @@
 import React from "react";
 import { useSignout } from "../hooks/useSignout";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const { userSignout } = useSignout();
@@ -9,7 +10,7 @@ function Navbar() {
   return (
     <div className="bg-gray-800 shadow-md rounded-xl mt-5">
       <div className="navbar flex justify-between px-4">
-        <div className="flex items-center">
+        <div className="flex items-center pr-72 ">
           <h1 className="text-xl font-bold text-blue-500">MyApp</h1>
         </div>
 
@@ -39,11 +40,12 @@ function Navbar() {
               <li>
                 <a className="flex justify-between hover:bg-gray-600">
                   Profile
-                  <span className="badge bg-blue-500 text-white">New</span>
                 </a>
               </li>
               <li>
-                <a className="hover:bg-gray-600">Settings</a>
+                <Link to="/settings" className="hover:bg-gray-600">
+                  Settings
+                </Link>
               </li>
               <li>
                 <span
