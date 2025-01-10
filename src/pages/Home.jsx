@@ -3,7 +3,7 @@ import { useCollection } from "../hooks/useCollection";
 
 function Home() {
   const { documents } = useCollection("projects");
-
+  console.log(documents);
   return (
     <div className="flex flex-col items-center px-5">
       <h1 className="text-4xl font-bold text-blue-500 mb-10">Dashboard</h1>

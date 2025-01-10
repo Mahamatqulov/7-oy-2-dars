@@ -95,7 +95,7 @@ function About() {
         </div>
       </div>
 
-      <div className=" mt-5 p-2 bg-gradient-to-b from-slate-600 rounded-2xl">
+      <div className=" mt-5 p-2 bg-gradient-to-b from-slate-600 rounded-2xl max-h-[350px] overflow-x-auto">
         <h1 className="text-center text-3xl font-medium mb-10">Chat</h1>
         {project.comments && project.comments.length === 0 ? (
           <h4 className="text-center my-10 italic opacity-50">
