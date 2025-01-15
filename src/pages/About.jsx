@@ -66,7 +66,7 @@ function About() {
 
   return (
     <div className="grid grid-cols-2 gap-5">
-      <div className="card bg-gradient-to-b from-slate-900 to-slate-800 text-neutral-content w-[350px] mt-5">
+      <div className="card bg-gradient-to-b from-slate-600 text-neutral-content w-[350px] mt-5">
         <div className="card-body">
           <h2 className="card-title text-2xl">{project.name}</h2>
           <h3 className="text-x italic font-extrabold">

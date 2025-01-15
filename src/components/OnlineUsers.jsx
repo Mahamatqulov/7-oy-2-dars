@@ -3,7 +3,7 @@ import { useCollection } from "../hooks/useCollection";
 function OnlineUsers() {
   const { documents } = useCollection("users");
   return (
-    <div className="max-w-sm w-full bg-gray-800 p-6 rounded-lg shadow-lg ">
+    <div className="max-w-sm w-full bg-gradient-to-b from-slate-900 p-6 rounded-lg shadow-lg ">
       <h1 className="text-center text-2xl font-semibold text-blue-400 mb-6">
         Online Users
       </h1>
@@ -12,7 +12,7 @@ function OnlineUsers() {
           documents.map((doc) => {
             return (
               <li key={doc.id} className="mb-4">
-                <div className="flex items-center gap-4 p-3 bg-gray-700 rounded-lg hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-4 p-3 bg-gradient-to-b from-slate-600 rounded-lg hover:shadow-md transition-shadow">
                   <div className="relative w-12 h-12">
                     <img
                       className="w-full h-full rounded-full ring-2 ring-blue-500"

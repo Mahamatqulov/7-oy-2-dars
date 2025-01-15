@@ -6,14 +6,14 @@ function Profile() {
   const { user } = useSelector((store) => store.user);
   return (
     <div>
-      <div className="mt-5 max-w-100 w-full h-[600px] bg-gradient-to-b from-slate-800 to-slate-600 shadow-lg rounded-lg p-6">
+      <div className="mt-5 max-w-100 w-full h-[600px] bg-info-to-p from-slate-800 to-slate-600 shadow-lg rounded-lg p-6">
         <div className="text-center mb-6">
           <h1 className="text-xl text-white font-semibold">
             {user.displayName}
           </h1>
         </div>
 
-        <div className="relative bg-gradient-to-b from-slate-900 to-slate-800 rounded-lg h-44 flex justify-center items-center mb-6">
+        <div className="relative bg-gradient-to-b from-slate-900 rounded-lg h-44 flex justify-center items-center mb-6">
           <div className="absolute  w-36 h-36 bg-pink-300 rounded-full border-4 border-white ">
             <img
               src={user.photoURL}

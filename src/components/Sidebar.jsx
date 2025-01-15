@@ -14,7 +14,7 @@ function Sidebar() {
   const { userSignout } = useSignout();
 
   return (
-    <div className="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 h-screen w-[300px] text-white flex flex-col shadow-lg">
+    <div className="bg-gradient-to-b from-slate-900 h-screen w-[300px] text-blue-600 flex flex-col shadow-lg">
       <div className="p-6 border-b border-gray-700">
         <Avatar user={user} />
         <p className="text-sm text-gray-400 text-center">{user?.email}</p>

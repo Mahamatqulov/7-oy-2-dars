@@ -15,7 +15,7 @@ function Home() {
               <Link
                 to={`/about/${doc.id}`}
                 key={doc.id}
-                className="group card bg-gray-800 shadow-lg rounded-lg border border-gray-700 hover:border-blue-500 transition-all duration-300 overflow-hidden"
+                className="group card bg-gradient-to-b from-slate-900 shadow-lg rounded-lg border border-gray-700 hover:border-blue-500 transition-all duration-300 overflow-hidden"
               >
                 <div className="card-body p-6">
                   <h2 className="card-title text-2xl font-semibold text-gray-300 group-hover:text-blue-500 mb-4 transition-colors">
