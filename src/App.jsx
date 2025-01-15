@@ -12,6 +12,7 @@ import ProtectedRouter from "./components/ProtectedRouter";
 import About from "./pages/About";
 import Settings from "./pages/Settings";
 import ErrorPage from "./pages/About";
+import Profile from "./pages/Profile";
 
 import { action as RegisterAction } from "./pages/Register";
 import { action as LoginAction } from "./pages/Login";
@@ -52,6 +53,10 @@ function App() {
         {
           path: "/settings",
           element: <Settings />,
+        },
+        {
+          path: "/profile",
+          element: <Profile />,
         },
       ],
     },

@@ -7,6 +7,7 @@ import { BsPersonFillAdd } from "react-icons/bs";
 import { GoProjectRoadmap } from "react-icons/go";
 import { CiLogout } from "react-icons/ci";
 import { IoSettingsOutline } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
 
 function Sidebar() {
   const { user } = useSelector((store) => store.user);
@@ -46,6 +47,19 @@ function Sidebar() {
             <span className="font-medium">Create</span>
           </NavLink>
         </li>
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-4 py-3 rounded-xl transition-all hover:bg-slate-300 hover:text-white ${
+                isActive ? "bg-slate-600 text-white" : "text-gray-300"
+              }`
+            }
+            to="/profile"
+          >
+            <CgProfile className="text-xl" />
+            <span className="font-medium">Profile</span>
+          </NavLink>
+        </li>
       </ul>
 
       <div className="mt-auto px-6 mb-10">
@@ -56,6 +70,7 @@ function Sidebar() {
           <IoSettingsOutline className="text-xl" />
           <span className="font-medium">Settings</span>
         </Link>
+
         <button
           onClick={userSignout}
           className="flex items-center  btn-block justify-center gap-3 px-4 py-3 rounded-xl bg-gray-800 text-gray-300 hover:bg-red-600 hover:text-white transition-all"

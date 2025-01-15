@@ -3,7 +3,7 @@ import { useCollection } from "../hooks/useCollection";
 function OnlineUsers() {
   const { documents } = useCollection("users");
   return (
-    <div className="max-w-sm w-full bg-gray-800 p-6 rounded-lg shadow-lg">
+    <div className="max-w-sm w-full bg-gray-800 p-6 rounded-lg shadow-lg max-h-[700px] overflow-x-auto">
       <h1 className="text-center text-2xl font-semibold text-blue-400 mb-6">
         Online Users
       </h1>
