@@ -159,7 +159,7 @@ function Navbar() {
             </div>
             <ul className="menu menu-sm dropdown-content bg-base-200 shadow mt-3 w-52 p-2 rounded-lg">
               <li>
-                <a>Profile</a>
+                <Link to="/profile">Profile</Link>
               </li>
               <li>
                 <Link to="/settings">Settings</Link>
