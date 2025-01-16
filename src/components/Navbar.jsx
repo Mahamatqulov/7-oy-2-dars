@@ -102,7 +102,7 @@ function Navbar() {
     <div className="shadow-md rounded-xl mt-5">
       <div className="navbar bg-base-200 flex justify-between px-4">
         <div className="flex items-center pr-72">
-          <h1 className="text-xl font-bold text-primary">MyApp</h1>
+          <h1 className="text-xl font-bold text-blue-600">MyApp</h1>
         </div>
 
         <div className="flex items-center gap-4">
